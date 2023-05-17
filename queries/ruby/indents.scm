@@ -21,11 +21,26 @@
   (parenthesized_statements)
 ] @indent.begin
 
+;; begin indent raw heredoc
+(((heredoc_beginning) (heredoc_body)) @indent.begin
+                   (#set! indent.immediate 1))
+
+;; begin indent assignment heredoc
+(((assignment) (heredoc_body)) @indent.begin
+                   (#set! indent.immediate 1))
+
+;; begin indent raw heredoc with method call
+(((call) (heredoc_body)) @indent.begin
+                   (#set! indent.immediate 1))
+
+(heredoc_content) @indent.auto
+
 [
   "end"
   ")"
   "}"
   "]"
+  (heredoc_end)
 ] @indent.end
 
 [
